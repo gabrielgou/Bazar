@@ -39,6 +39,7 @@ public class OrgaoFiscalizadorController {
             throw  new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
+    @CrossOrigin("*")
     @DeleteMapping("/orgaoFiscalizador/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id)
     {
@@ -49,6 +50,7 @@ public class OrgaoFiscalizadorController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    @CrossOrigin("*")
     @PutMapping("/orgaoFiscalizador")
     public ResponseEntity<?> update(@RequestBody OrgaoFiscalizador of)
     {
@@ -59,7 +61,6 @@ public class OrgaoFiscalizadorController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-
     @CrossOrigin("*")
     @GetMapping("/orgaoFiscalizador")
     public ResponseEntity<List<OrgaoFiscalizador>> readAll()

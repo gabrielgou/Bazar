@@ -37,6 +37,7 @@ public class OrgaoDonatarioController {
             throw  new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
+    @CrossOrigin("*")
     @DeleteMapping("/orgaoDonatario/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id)
     {
@@ -47,6 +48,7 @@ public class OrgaoDonatarioController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    @CrossOrigin("*")
     @PutMapping("/orgaoDonatario")
     public ResponseEntity<?> update(@RequestBody OrgaoDonatario p)
     {

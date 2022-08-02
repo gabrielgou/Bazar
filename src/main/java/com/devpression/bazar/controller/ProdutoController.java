@@ -37,22 +37,24 @@ public class ProdutoController {
             throw  new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
+    @CrossOrigin("*")
     @DeleteMapping("/produto/{codigo}")
     public ResponseEntity<?> delete(@PathVariable("codigo") int codigo)
     {
         try {
             RepositorioProduto.getCurrentInstance().delete(codigo);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>("Produto Apagado", HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    @CrossOrigin("*")
     @PutMapping("/produto")
     public ResponseEntity<?> update(@RequestBody Produto p)
     {
         try {
             RepositorioProduto.getCurrentInstance().update(p);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>("Produto Atualizado", HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

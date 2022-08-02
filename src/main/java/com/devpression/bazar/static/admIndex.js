@@ -29,8 +29,9 @@ cadastrarProduto.onclick= (ev)=> {
     form.reset()
 }
 let catalogoProduto = document.getElementById("btnCatalogoProduto")
-catalogoProduto.onclick= async ( ev)=> {
-    ev.preventDefault()
+catalogoProduto.onclick= printCatalogoProduto()
+async function printCatalogoProduto()
+{
     let conteudoTabelaProduto = document.getElementById("conteudoTabelaProduto")
     let tabela1 = document.getElementById("tabelaCatalogoProduto")
     conteudoTabelaProduto.removeChild(tabela1)
@@ -92,4 +93,24 @@ catalogoProduto.onclick= async ( ev)=> {
         .catch(function (erro) {
             alert(erro)
         })
+
+}
+function apagarProduto(codigo) {
+    fetch("http://localhost:8080/produto/"+codigo, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(function (response) {
+            return response.text()
+        })
+        .then(function (data) {
+            printCatalogoProduto()
+            alert(data)
+        })
+        .catch(function (erro) {
+            alert(erro)
+        })
+
 }

@@ -38,6 +38,7 @@ public class LoteController {
             throw  new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
+    @CrossOrigin("*")
     @DeleteMapping("/lote/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id)
     {
@@ -48,6 +49,7 @@ public class LoteController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    @CrossOrigin("*")
     @PutMapping("/lote")
     public ResponseEntity<?> update(@RequestBody Lote of)
     {
