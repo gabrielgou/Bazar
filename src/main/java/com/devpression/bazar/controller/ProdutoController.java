@@ -20,7 +20,7 @@ public class ProdutoController {
             RepositorioProduto.getCurrentInstance().create(produto);
             return new ResponseEntity<>("Cadastrado com Sucesso",HttpStatus.CREATED);
         } catch (SQLException | ClassNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
     }
@@ -45,7 +45,7 @@ public class ProdutoController {
             RepositorioProduto.getCurrentInstance().delete(codigo);
             return new ResponseEntity<>("Produto Apagado", HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
     @CrossOrigin("*")
@@ -56,7 +56,7 @@ public class ProdutoController {
             RepositorioProduto.getCurrentInstance().update(p);
             return new ResponseEntity<>("Produto Atualizado", HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
 
