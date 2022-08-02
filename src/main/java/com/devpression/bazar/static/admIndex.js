@@ -138,7 +138,6 @@ async function loadAlterarProduto(codigo)
         .then(function (data)
         {
             let {id,nome, descricao} = JSON.parse(data)
-            console.log(JSON.parse(data))
             document.getElementById("alterarCodigo").value=codigo
             document.getElementById("alterarNome").value=nome
             document.getElementById("alterarDescrição").value=descricao
@@ -173,5 +172,4 @@ function alterarProduto() {
             alert(erro)
         })
     form.reset()
-
 }
