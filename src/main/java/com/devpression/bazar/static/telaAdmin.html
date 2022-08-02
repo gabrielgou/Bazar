@@ -49,29 +49,39 @@
     <div id="telaCadastroProduto" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <h1>Cadastrar Novo Produto</h1>
-                <form id="formCadastroProduto">
-                    <table class="table">
-                        <tr>
-                            <td><input type="text" name="nome" placeholder="Nome" required="true"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="descricao" placeholder="Descrição" required="true"></td>
-                        </tr>
-                        <tr>
-                            <td> <button id="cadastrarProduto" class="btn btn-primary">Cadastrar</button></td>
-                        </tr>
-                    </table>
-                </form>
+                <div class="modal-body">
+                    <h1>Cadastrar Novo Produto</h1>
+                    <form id="formCadastroProduto">
+                        <table class="table">
+                            <tr>
+                                <td><input type="text" name="nome" placeholder="Nome" required="true"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="descricao" placeholder="Descrição" required="true"></td>
+                            </tr>
+                            <tr>
+                                <td> <button id="cadastrarProduto" class="btn btn-primary">Cadastrar</button></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
 
     <div id="telaCatalogoProduto" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div id="conteudoTabelaProduto" class="modal-content">
-                <h1>Cadastrar Novo Produto</h1>
-                <table class="table" id="tabelaCatalogoProduto"></table>
+            <div class="modal-content">
+                <div class="modal-body" id="conteudoTabelaProduto" >
+                    <h1>Cadastrar Novo Produto</h1>
+                    <table class="table" id="tabelaCatalogoProduto"></table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
