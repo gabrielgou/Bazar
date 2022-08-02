@@ -1,6 +1,4 @@
-let cadastrarProduto = document.getElementById("cadastrarProduto");
-cadastrarProduto.onclick= (ev)=> {
-    ev.preventDefault();
+function Cadastrarproduto() {
     const json={}
     let form = document.getElementById("formCadastroProduto");
     let dataForm = new FormData(form);
@@ -28,9 +26,7 @@ cadastrarProduto.onclick= (ev)=> {
         })
     form.reset()
 }
-let catalogoProduto = document.getElementById("btnCatalogoProduto")
-catalogoProduto.onclick= printCatalogoProduto()
-async function printCatalogoProduto()
+function printCatalogoProduto()
 {
     let conteudoTabelaProduto = document.getElementById("conteudoTabelaProduto")
     let tabela1 = document.getElementById("tabelaCatalogoProduto")
@@ -52,7 +48,7 @@ async function printCatalogoProduto()
     trhead.appendChild(th3)
     trhead.appendChild(th4)
     tabela.appendChild(trhead)
-    await fetch("http://localhost:8080/produto", {
+    fetch("http://localhost:8080/produto", {
         method: "GET",
         headers: {
             "Content-Type":"application/json"
@@ -112,5 +108,16 @@ function apagarProduto(codigo) {
         .catch(function (erro) {
             alert(erro)
         })
-
+}
+async function atualizarBody(http) {
+    const resp = await fetch(http);
+    const html = await resp.text();
+    document.getElementById("bodyContent").innerHTML=html
+}
+async function loadCatalogo()
+{
+    const resp = await fetch("CatalogoProduto.html");
+    const html = await resp.text();
+    document.getElementById("bodyContent").innerHTML=html
+    printCatalogoProduto();
 }
