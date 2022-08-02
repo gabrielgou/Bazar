@@ -71,7 +71,7 @@ function printCatalogoProduto()
                 bt1.innerHTML="Apagar"
                 let bt2 = document.createElement("button")
                 //bt2.setAttribute("class", "btn btn-primary");
-                bt2.setAttribute("onclick", "alterarProduto("+codigo+")")
+                bt2.setAttribute("onclick", "loadAlterarProduto("+codigo+")")
                 bt2.innerHTML="Alterar"
                 td1.innerHTML=codigo
                 td2.innerHTML=nome
@@ -120,4 +120,58 @@ async function loadCatalogo()
     const html = await resp.text();
     document.getElementById("bodyContent").innerHTML=html
     printCatalogoProduto();
+}
+async function loadAlterarProduto(codigo)
+{
+    const resp = await fetch("AlterarProduto.html");
+    const html = await resp.text();
+    document.getElementById("bodyContent").innerHTML=html
+    const produto = await  fetch("http://localhost:8080/produto/"+codigo, {
+        method:"GET",
+        headers:{
+            "Content-Type": "application/json"
+        }
+    })
+        .then(function (response){
+            return response.text();
+        })
+        .then(function (data)
+        {
+            let {id,nome, descricao} = JSON.parse(data)
+            console.log(JSON.parse(data))
+            document.getElementById("alterarCodigo").value=codigo
+            document.getElementById("alterarNome").value=nome
+            document.getElementById("alterarDescrição").value=descricao
+        })
+        .catch(function (erro){
+            alert(erro);
+        })
+}
+function alterarProduto() {
+    const json={}
+    let form = document.getElementById("formAlterarProduto");
+    let dataForm = new FormData(form);
+    for ([name, value] of dataForm) {
+        json[name] = value
+    }
+    fetch("http://localhost:8080/produto", {
+        method: "PUT",
+        body: JSON.stringify(json),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(function (response) {
+            return response.text()
+        })
+        .then(function (data) {
+            loadCatalogo();
+            alert(data)
+
+        })
+        .catch(function (erro) {
+            alert(erro)
+        })
+    form.reset()
+
 }
