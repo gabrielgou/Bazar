@@ -31,7 +31,25 @@ cadastrarProduto.onclick= (ev)=> {
 let catalogoProduto = document.getElementById("btnCatalogoProduto")
 catalogoProduto.onclick= (ev)=> {
     ev.preventDefault()
+    let conteudoTabelaProduto = document.getElementById("conteudoTabelaProduto")
     let tabela = document.getElementById("tabelaCatalogoProduto")
+    conteudoTabelaProduto.removeChild(tabela)
+    tabela = document.createElement("table")
+    tabela.setAttribute("class", "table")
+    let trhead = document.createElement("tr")
+    let th1 = document.createElement("th")
+    let th2 = document.createElement("th")
+    let th3 = document.createElement("th")
+    let th4 = document.createElement("th")
+    th1.innerHTML="Código"
+    th2.innerHTML="Nome"
+    th3.innerHTML="Descrição"
+    th4.innerHTML="Ações"
+    trhead.appendChild(th1)
+    trhead.appendChild(th2)
+    trhead.appendChild(th3)
+    trhead.appendChild(th4)
+    tabela.appendChild(trhead)
     fetch("http://localhost:8080/produto", {
         method: "GET",
         headers: {
@@ -67,6 +85,7 @@ catalogoProduto.onclick= (ev)=> {
                 tr.appendChild(td3)
                 tr.appendChild(td4)
                 tabela.appendChild(tr);
+                conteudoTabelaProduto.appendChild(tabela)
             })
         })
         .catch(function (erro) {

@@ -53,10 +53,10 @@
                 <form id="formCadastroProduto">
                     <table class="table">
                         <tr>
-                            <td><input type="text" name="nome" placeholder="Nome" required></td>
+                            <td><input type="text" name="nome" placeholder="Nome" required="true"></td>
                         </tr>
                         <tr>
-                            <td><input type="text" name="descricao" placeholder="Descrição" required></td>
+                            <td><input type="text" name="descricao" placeholder="Descrição" required="true"></td>
                         </tr>
                         <tr>
                             <td> <button id="cadastrarProduto" class="btn btn-primary">Cadastrar</button></td>
@@ -69,12 +69,9 @@
 
     <div id="telaCatalogoProduto" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div id="conteudoTabelaProduto" class="modal-content">
                 <h1>Cadastrar Novo Produto</h1>
-                <table class="table" id="tabelaCatalogoProduto">
-                    <tr><th>Codigo</th><th>Nome</th><th>Descrição</th><th>Ações</th></tr>
-                </table>
-                </form>
+                <table class="table" id="tabelaCatalogoProduto"></table>
             </div>
         </div>
     </div>
