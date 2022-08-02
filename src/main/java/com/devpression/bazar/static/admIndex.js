@@ -29,13 +29,14 @@ cadastrarProduto.onclick= (ev)=> {
     form.reset()
 }
 let catalogoProduto = document.getElementById("btnCatalogoProduto")
-catalogoProduto.onclick= (ev)=> {
+catalogoProduto.onclick= async ( ev)=> {
     ev.preventDefault()
     let conteudoTabelaProduto = document.getElementById("conteudoTabelaProduto")
-    let tabela = document.getElementById("tabelaCatalogoProduto")
-    conteudoTabelaProduto.removeChild(tabela)
-    tabela = document.createElement("table")
+    let tabela1 = document.getElementById("tabelaCatalogoProduto")
+    conteudoTabelaProduto.removeChild(tabela1)
+    let tabela = document.createElement("table")
     tabela.setAttribute("class", "table")
+    tabela.setAttribute("id","tabelaCatalogoProduto" )
     let trhead = document.createElement("tr")
     let th1 = document.createElement("th")
     let th2 = document.createElement("th")
@@ -50,7 +51,7 @@ catalogoProduto.onclick= (ev)=> {
     trhead.appendChild(th3)
     trhead.appendChild(th4)
     tabela.appendChild(trhead)
-    fetch("http://localhost:8080/produto", {
+    await fetch("http://localhost:8080/produto", {
         method: "GET",
         headers: {
             "Content-Type":"application/json"
