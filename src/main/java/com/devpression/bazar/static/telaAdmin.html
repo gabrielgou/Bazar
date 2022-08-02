@@ -8,18 +8,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script async src="admIndex.js"></script>
-    <link href="admIndex.css" type="text/css" rel="stylesheet"/>
+    <script async src="script/admProduto.js"></script>
+    <script async src="script/admOD.js"></script>
+    <link href="style/admIndex.css" type="text/css" rel="stylesheet"/>
 
 </head>
 <body>
     <nav>
         <ul class="menu">
-            <li><a href="#">Home</a> </li>
+            <li><a href="#" onclick="document.getElementById('bodyContent').innerHTML=''">Home</a> </li>
             <li><a href="#">Produto</a>
                 <ul>
-                    <!--<li><a data-toggle="modal" data-target="#myModal">Tela de Clientes</a></li>-->
-                    <li><a href="#" onclick="atualizarBody('CadastroProduto.html')">Cadastro Produto</a></li>
+                    <li><a href="#" onclick="atualizarBody('produto/CadastroProduto.html')">Cadastro Produto</a></li>
                     <li><a href="#" onclick="loadCatalogo()">Catálogo de Produtos</a> </li>
                 </ul>
             </li>
@@ -43,7 +43,7 @@
                     <li><a href="#">Catálogo de Lotes</a> </li>
                 </ul>
             </li>
-            <li><a href="/">Logout</a></li>
+            <li><a href="#">Logout</a></li>
         </ul>
     </nav>
     <div id="bodyContent">

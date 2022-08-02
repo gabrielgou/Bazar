@@ -116,14 +116,14 @@ async function atualizarBody(http) {
 }
 async function loadCatalogo()
 {
-    const resp = await fetch("CatalogoProduto.html");
+    const resp = await fetch("produto/CatalogoProduto.html");
     const html = await resp.text();
     document.getElementById("bodyContent").innerHTML=html
     printCatalogoProduto();
 }
 async function loadAlterarProduto(codigo)
 {
-    const resp = await fetch("AlterarProduto.html");
+    const resp = await fetch("produto/AlterarProduto.html");
     const html = await resp.text();
     document.getElementById("bodyContent").innerHTML=html
     const produto = await  fetch("http://localhost:8080/produto/"+codigo, {
