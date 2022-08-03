@@ -1,5 +1,5 @@
 
-function CadastrarOF() {
+async function CadastrarOF() {
     const json={}
     let form = document.getElementById("formCadastroOF");
     let dataForm = new FormData(form);
@@ -7,28 +7,19 @@ function CadastrarOF() {
         json[name] = value
         dataForm.set(name,null)
     }
-    fetch("http://localhost:8080/orgaoFiscalizador", {
+    const resp = await fetch("http://localhost:8080/orgaoFiscalizador", {
         method: "POST",
         body: JSON.stringify(json),
         headers: {
             'Content-Type': 'application/json'
         }
     })
-        .then(function (response) {
-            return response.text()
-        })
-        .then(function (data) {
-
-            alert(data)
-
-        })
-        .catch(function (erro) {
-            alert(erro)
-        })
+    const data = await resp.text()
+    alert(data)
     form.reset()
 }
 
-function printCatalogoOF()
+async function printCatalogoOF()
 {
     let conteudoTabelaOF = document.getElementById("conteudoTabelaOF")
     let tabela1 = document.getElementById("tabelaCatalogoOF")
@@ -50,67 +41,53 @@ function printCatalogoOF()
     trhead.appendChild(th3)
     trhead.appendChild(th4)
     tabela.appendChild(trhead)
-    fetch("http://localhost:8080/orgaoFiscalizador", {
+    const resp = await fetch("http://localhost:8080/orgaoFiscalizador", {
         method: "GET",
         headers: {
             "Content-Type":"application/json"
         }
     })
-        .then(function (response) {
-            return response.text()
-        })
-        .then(function(data){
-            JSON.parse(data).forEach(element=> {
-                let {id,nome, descricao} = element
-                let tr = document.createElement("tr")
-                let td1 = document.createElement("th")
-                let td2 = document.createElement("td")
-                let td3 = document.createElement("td")
-                let td4 = document.createElement("td")
-                let bt1 = document.createElement("button")
-                //bt1.setAttribute("class", "btn btn-primary");
-                bt1.setAttribute("onclick", "apagarOF("+id+")")
-                bt1.innerHTML="Apagar"
-                let bt2 = document.createElement("button")
-                //bt2.setAttribute("class", "btn btn-primary");
-                bt2.setAttribute("onclick", "loadAlterarOF("+id+")")
-                bt2.innerHTML="Alterar"
-                td1.innerHTML=id
-                td2.innerHTML=nome
-                td3.innerHTML=descricao
-                td4.appendChild(bt1)
-                td4.appendChild(bt2)
-                tr.appendChild(td1)
-                tr.appendChild(td2)
-                tr.appendChild(td3)
-                tr.appendChild(td4)
-                tabela.appendChild(tr);
-                conteudoTabelaOF.appendChild(tabela)
-            })
-        })
-        .catch(function (erro) {
-            alert(erro)
-        })
+    const data = await resp.text()
+    JSON.parse(data).forEach(element=> {
+        let {id,nome, descricao} = element
+        let tr = document.createElement("tr")
+        let td1 = document.createElement("th")
+        let td2 = document.createElement("td")
+        let td3 = document.createElement("td")
+        let td4 = document.createElement("td")
+        let bt1 = document.createElement("button")
+        //bt1.setAttribute("class", "btn btn-primary");
+        bt1.setAttribute("onclick", "apagarOF("+id+")")
+        bt1.innerHTML="Apagar"
+        let bt2 = document.createElement("button")
+        //bt2.setAttribute("class", "btn btn-primary");
+        bt2.setAttribute("onclick", "loadAlterarOF("+id+")")
+        bt2.innerHTML="Alterar"
+        td1.innerHTML=id
+        td2.innerHTML=nome
+        td3.innerHTML=descricao
+        td4.appendChild(bt1)
+        td4.appendChild(bt2)
+        tr.appendChild(td1)
+        tr.appendChild(td2)
+        tr.appendChild(td3)
+        tr.appendChild(td4)
+        tabela.appendChild(tr);
+        conteudoTabelaOF.appendChild(tabela)
+    })
 
 }
-function apagarOF(id) {
+async function apagarOF(id) {
     if(confirm("Você tem certeza que deseja apagar?")) {
-        fetch("http://localhost:8080/orgaoFiscalizador/" + id, {
+        const resp = await fetch("http://localhost:8080/orgaoFiscalizador/" + id, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
             }
         })
-            .then(function (response) {
-                return response.text()
-            })
-            .then(function (data) {
-                printCatalogoOF()
-                alert(data)
-            })
-            .catch(function (erro) {
-                alert(erro)
-            })
+        const data = await resp.text()
+        alert(data)
+        printCatalogoOF()
     }
 }
 async function loadCatalogoOF()
@@ -125,49 +102,34 @@ async function loadAlterarOF(id)
     const resp = await fetch("orgFiscalizador/AlterarOF.html");
     const html = await resp.text();
     document.getElementById("bodyContent").innerHTML=html
-    const OF = await  fetch("http://localhost:8080/orgaoFiscalizador/"+id, {
+    const resp2 = await  fetch("http://localhost:8080/orgaoFiscalizador/"+id, {
         method:"GET",
         headers:{
             "Content-Type": "application/json"
         }
     })
-        .then(function (response){
-            return response.text();
-        })
-        .then(function (data)
-        {
-            let {id,nome, descricao} = JSON.parse(data)
-            document.getElementById("alterarId").value=id
-            document.getElementById("alterarNome").value=nome
-            document.getElementById("alterarDescrição").value=descricao
-        })
-        .catch(function (erro){
-            alert(erro);
-        })
+    const data = await resp2.text()
+    let {id1,nome, descricao} = JSON.parse(data)
+    document.getElementById("alterarId").value=id
+    document.getElementById("alterarNome").value=nome
+    document.getElementById("alterarDescrição").value=descricao
 }
-function alterarOF() {
+async function alterarOF() {
     const json={}
     let form = document.getElementById("formAlterarOF");
     let dataForm = new FormData(form);
     for ([name, value] of dataForm) {
         json[name] = value
     }
-    fetch("http://localhost:8080/orgaoFiscalizador", {
+    const resp = await fetch("http://localhost:8080/orgaoFiscalizador", {
         method: "PUT",
         body: JSON.stringify(json),
         headers: {
             'Content-Type': 'application/json'
         }
     })
-        .then(function (response) {
-            return response.text()
-        })
-        .then(function (data) {
-            alert(data)
-
-        })
-        .catch(function (erro) {
-            alert(erro)
-        })
+    const data = await resp.text()
+    alert(data)
+    loadCatalogoOF()
 }
 

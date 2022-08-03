@@ -7,24 +7,16 @@ async function Cadastrarproduto(e) {
         json[name] = value
         dataForm.set(name,null)
     }
-    await fetch("http://localhost:8080/produto", {
+    const resp = await fetch("http://localhost:8080/produto", {
         method: "POST",
         body: JSON.stringify(json),
-        headers: {
-            'Content-Type': 'application/json'
+        headers:{
+            "Content-Type": "application/json"
         }
     })
-        .then(await function (response) {
-            return response.text()
-        })
-        .then(await function (data) {
-
-            alert(data)
-
-        })
-        .catch(function (erro) {
-            alert(erro)
-        })
+    const data = await resp.text()
+    form.reset()
+    alert(data)
 }
 async function printCatalogoProduto()
 {
@@ -49,48 +41,40 @@ async function printCatalogoProduto()
     trhead.appendChild(th3)
     trhead.appendChild(th4)
     tabela.appendChild(trhead)
-    await fetch("http://localhost:8080/produto", {
+    const resp =await fetch("http://localhost:8080/produto", {
         method: "GET",
         headers: {
             "Content-Type":"application/json"
         }
     })
-        .then(await function (response) {
-            return response.text()
-        })
-        .then(await function(data){
-            JSON.parse(data).forEach(element=> {
-                let {codigo,nome, descricao} = element
-                let tr = document.createElement("tr")
-                let td1 = document.createElement("th")
-                let td2 = document.createElement("td")
-                let td3 = document.createElement("td")
-                let td4 = document.createElement("td")
-                let bt1 = document.createElement("button")
-                //bt1.setAttribute("class", "btn btn-primary");
-                bt1.setAttribute("onclick", "apagarProduto("+codigo+")")
-                bt1.innerHTML="Apagar"
-                let bt2 = document.createElement("button")
-                //bt2.setAttribute("class", "btn btn-primary");
-                bt2.setAttribute("onclick", "loadAlterarProduto("+codigo+")")
-                bt2.innerHTML="Alterar"
-                td1.innerHTML=codigo
-                td2.innerHTML=nome
-                td3.innerHTML=descricao
-                td4.appendChild(bt1)
-                td4.appendChild(bt2)
-                tr.appendChild(td1)
-                tr.appendChild(td2)
-                tr.appendChild(td3)
-                tr.appendChild(td4)
-                tabela.appendChild(tr);
-                conteudoTabelaProduto.appendChild(tabela)
-            })
-        })
-        .catch(function (erro) {
-            alert(erro)
-        })
-
+    const data = await resp.text()
+    JSON.parse(data).forEach(element=> {
+        let {codigo, nome, descricao} = element
+        let tr = document.createElement("tr")
+        let td1 = document.createElement("th")
+        let td2 = document.createElement("td")
+        let td3 = document.createElement("td")
+        let td4 = document.createElement("td")
+        let bt1 = document.createElement("button")
+        //bt1.setAttribute("class", "btn btn-primary");
+        bt1.setAttribute("onclick", "apagarProduto(" + codigo + ")")
+        bt1.innerHTML = "Apagar"
+        let bt2 = document.createElement("button")
+        //bt2.setAttribute("class", "btn btn-primary");
+        bt2.setAttribute("onclick", "loadAlterarProduto(" + codigo + ")")
+        bt2.innerHTML = "Alterar"
+        td1.innerHTML = codigo
+        td2.innerHTML = nome
+        td3.innerHTML = descricao
+        td4.appendChild(bt1)
+        td4.appendChild(bt2)
+        tr.appendChild(td1)
+        tr.appendChild(td2)
+        tr.appendChild(td3)
+        tr.appendChild(td4)
+        tabela.appendChild(tr);
+        conteudoTabelaProduto.appendChild(tabela)
+    })
 }
 async function apagarProduto(codigo) {
     console.log("ApagarProduto")
@@ -122,9 +106,8 @@ async function atualizarBody(http) {
 async function loadCatalogo()
 {
 
-    console.log("loadCatalogo")
-    const resp = await fetch("produto/CatalogoProduto.html");
-    const html = await resp.text();
+    const resp = await fetch("produto/CatalogoProduto.html")
+    const html = await resp.text()
     document.getElementById("bodyContent").innerHTML=html
     printCatalogoProduto();
 }
@@ -134,25 +117,17 @@ async function loadAlterarProduto(codigo)
     const resp = await fetch("produto/AlterarProduto.html");
     const html = await resp.text();
     document.getElementById("bodyContent").innerHTML=html
-    await fetch("http://localhost:8080/produto/"+codigo, {
+    const resp2 = await fetch("http://localhost:8080/produto/"+codigo, {
         method:"GET",
         headers:{
             "Content-Type": "application/json"
         }
     })
-        .then(await function (response){
-            return response.text();
-        })
-        .then(await function (data)
-        {
-            let {id,nome, descricao} = JSON.parse(data)
-            document.getElementById("alterarCodigo").value=codigo
-            document.getElementById("alterarNome").value=nome
-            document.getElementById("alterarDescrição").value=descricao
-        })
-        .catch(function (erro){
-            alert(erro);
-        })
+    const data = await resp2.text()
+    let {id,nome, descricao} = JSON.parse(data)
+    document.getElementById("alterarCodigo").value=codigo
+    document.getElementById("alterarNome").value=nome
+    document.getElementById("alterarDescrição").value=descricao
 }
 async function alterarProduto() {
     console.log("alterarProduto")
@@ -164,22 +139,14 @@ async function alterarProduto() {
     }
 
 
-    await fetch("http://localhost:8080/produto", {
+    let resp = await fetch("http://localhost:8080/produto", {
         method: "PUT",
         body: JSON.stringify(json),
         headers: {
             'Content-Type': 'application/json'
         }
     })
-        .then(await function (response) {
-            return response.text()
-        })
-        .then(await function (data) {
-            alert(data)
-        })
-        .then(loadCatalogo())
-        .catch(function (erro) {
-            alert(erro)
-        })
-
+    let data = await resp.text()
+    alert(data)
+    loadCatalogo()
 }
