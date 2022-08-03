@@ -6,6 +6,7 @@ function Cadastrarproduto() {
         json[name] = value
         dataForm.set(name,null)
     }
+    document.body.insertAdjacentHTML("beforeend")
     fetch("http://localhost:8080/produto", {
         method: "POST",
         body: JSON.stringify(json),
