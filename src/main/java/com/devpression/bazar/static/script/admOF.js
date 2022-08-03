@@ -94,22 +94,27 @@ function printCatalogoOF()
 
 }
 function apagarOF(id) {
-    fetch("http://localhost:8080/orgaoFiscalizador/"+id, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-        .then(function (response) {
-            return response.text()
+    if(confirm("Você tem certeza que deseja apagar?")) {
+        fetch("http://localhost:8080/orgaoFiscalizador/" + id, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
         })
-        .then(function (data) {
-            printCatalogoOF()
-            alert(data)
-        })
-        .catch(function (erro) {
-            alert(erro)
-        })
+            .then(function (response) {
+                return response.text()
+            })
+            .then(function (data) {
+                printCatalogoOF()
+                alert(data)
+            })
+            .catch(function (erro) {
+                alert(erro)
+            })
+    }
+    else{
+        printCatalogoOF()
+    }
 }
 async function atualizarBody(http) {
     const resp = await fetch(http);

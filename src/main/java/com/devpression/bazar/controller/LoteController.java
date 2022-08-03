@@ -19,9 +19,9 @@ public class LoteController {
     {
         try {
             RepositorioLote.getCurrentInstance().create(l);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>("Lote Adicionado",HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
     }
@@ -44,9 +44,9 @@ public class LoteController {
     {
         try {
             RepositorioLote.getCurrentInstance().delete(id);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>("Lote Deletado",HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
     @CrossOrigin("*")
@@ -55,9 +55,9 @@ public class LoteController {
     {
         try {
             RepositorioLote.getCurrentInstance().update(of);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>("Lote Alterado",HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
 

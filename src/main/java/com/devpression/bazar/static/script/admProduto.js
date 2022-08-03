@@ -1,4 +1,4 @@
-function Cadastrarproduto() {
+function Cadastrarproduto(e) {
     const json={}
     let form = document.getElementById("formCadastroProduto");
     let dataForm = new FormData(form);
@@ -6,7 +6,6 @@ function Cadastrarproduto() {
         json[name] = value
         dataForm.set(name,null)
     }
-    document.body.insertAdjacentHTML("beforeend")
     fetch("http://localhost:8080/produto", {
         method: "POST",
         body: JSON.stringify(json),
@@ -25,7 +24,6 @@ function Cadastrarproduto() {
         .catch(function (erro) {
             alert(erro)
         })
-    form.reset()
 }
 function printCatalogoProduto()
 {
@@ -93,22 +91,28 @@ function printCatalogoProduto()
 
 }
 function apagarProduto(codigo) {
-    fetch("http://localhost:8080/produto/"+codigo, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-        .then(function (response) {
-            return response.text()
+    if(confirm("Você tem certeza que deseja apagar?")) {
+        fetch("http://localhost:8080/produto/" + codigo, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
         })
-        .then(function (data) {
-            printCatalogoProduto()
-            alert(data)
-        })
-        .catch(function (erro) {
-            alert(erro)
-        })
+            .then(function (response) {
+                return response.text()
+            })
+            .then(function (data) {
+                printCatalogoProduto()
+                alert(data)
+            })
+            .catch(function (erro) {
+                alert(erro)
+            })
+    }
+    else
+    {
+        printCatalogoProduto()
+    }
 }
 async function atualizarBody(http) {
     const resp = await fetch(http);

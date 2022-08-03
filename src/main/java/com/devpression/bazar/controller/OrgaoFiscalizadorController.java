@@ -20,7 +20,7 @@ public class OrgaoFiscalizadorController {
     {
         try {
             RepositorioOF.getCurrentInstance().create(of);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>("Orgão Fiscal Adicionado",HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -45,9 +45,9 @@ public class OrgaoFiscalizadorController {
     {
         try {
             RepositorioOF.getCurrentInstance().delete(id);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>("Orgão Fiscal Deletado",HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
     @CrossOrigin("*")
@@ -56,9 +56,9 @@ public class OrgaoFiscalizadorController {
     {
         try {
             RepositorioOF.getCurrentInstance().update(of);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>("Orgão Fiscal Alterado",HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
     @CrossOrigin("*")

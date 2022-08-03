@@ -18,9 +18,9 @@ public class OrgaoDonatarioController {
     {
         try {
             RepositorioOD.getCurrentInstance().create(od);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>("Orgão Donatario Adicionado",HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
     }
@@ -43,9 +43,9 @@ public class OrgaoDonatarioController {
     {
         try {
             RepositorioOD.getCurrentInstance().delete(id);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>("Orgão Donatario Excluido",HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
     @CrossOrigin("*")
@@ -54,9 +54,9 @@ public class OrgaoDonatarioController {
     {
         try {
             RepositorioOD.getCurrentInstance().update(p);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>("Orgão Donatário Alterado",HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
 
