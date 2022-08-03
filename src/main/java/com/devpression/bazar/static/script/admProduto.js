@@ -1,4 +1,5 @@
-function Cadastrarproduto(e) {
+async function Cadastrarproduto(e) {
+    console.log("CadastrarProduto")
     const json={}
     let form = document.getElementById("formCadastroProduto");
     let dataForm = new FormData(form);
@@ -6,17 +7,17 @@ function Cadastrarproduto(e) {
         json[name] = value
         dataForm.set(name,null)
     }
-    fetch("http://localhost:8080/produto", {
+    await fetch("http://localhost:8080/produto", {
         method: "POST",
         body: JSON.stringify(json),
         headers: {
             'Content-Type': 'application/json'
         }
     })
-        .then(function (response) {
+        .then(await function (response) {
             return response.text()
         })
-        .then(function (data) {
+        .then(await function (data) {
 
             alert(data)
 
@@ -25,8 +26,9 @@ function Cadastrarproduto(e) {
             alert(erro)
         })
 }
-function printCatalogoProduto()
+async function printCatalogoProduto()
 {
+    console.log("printCatalogo")
     let conteudoTabelaProduto = document.getElementById("conteudoTabelaProduto")
     let tabela1 = document.getElementById("tabelaCatalogoProduto")
     conteudoTabelaProduto.removeChild(tabela1)
@@ -47,16 +49,16 @@ function printCatalogoProduto()
     trhead.appendChild(th3)
     trhead.appendChild(th4)
     tabela.appendChild(trhead)
-    fetch("http://localhost:8080/produto", {
+    await fetch("http://localhost:8080/produto", {
         method: "GET",
         headers: {
             "Content-Type":"application/json"
         }
     })
-        .then(function (response) {
+        .then(await function (response) {
             return response.text()
         })
-        .then(function(data){
+        .then(await function(data){
             JSON.parse(data).forEach(element=> {
                 let {codigo,nome, descricao} = element
                 let tr = document.createElement("tr")
@@ -90,18 +92,19 @@ function printCatalogoProduto()
         })
 
 }
-function apagarProduto(codigo) {
+async function apagarProduto(codigo) {
+    console.log("ApagarProduto")
     if(confirm("Você tem certeza que deseja apagar?")) {
-        fetch("http://localhost:8080/produto/" + codigo, {
+        await fetch("http://localhost:8080/produto/" + codigo, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
             }
         })
-            .then(function (response) {
+            .then(await function (response) {
                 return response.text()
             })
-            .then(function (data) {
+            .then(await function (data) {
                 printCatalogoProduto()
                 alert(data)
             })
@@ -109,18 +112,17 @@ function apagarProduto(codigo) {
                 alert(erro)
             })
     }
-    else
-    {
-        printCatalogoProduto()
-    }
 }
 async function atualizarBody(http) {
+    console.log("AtualizarBody")
     const resp = await fetch(http);
     const html = await resp.text();
     document.getElementById("bodyContent").innerHTML=html
 }
 async function loadCatalogo()
 {
+
+    console.log("loadCatalogo")
     const resp = await fetch("produto/CatalogoProduto.html");
     const html = await resp.text();
     document.getElementById("bodyContent").innerHTML=html
@@ -128,19 +130,20 @@ async function loadCatalogo()
 }
 async function loadAlterarProduto(codigo)
 {
+    console.log("loadAlterar")
     const resp = await fetch("produto/AlterarProduto.html");
     const html = await resp.text();
     document.getElementById("bodyContent").innerHTML=html
-    const produto = await  fetch("http://localhost:8080/produto/"+codigo, {
+    await fetch("http://localhost:8080/produto/"+codigo, {
         method:"GET",
         headers:{
             "Content-Type": "application/json"
         }
     })
-        .then(function (response){
+        .then(await function (response){
             return response.text();
         })
-        .then(function (data)
+        .then(await function (data)
         {
             let {id,nome, descricao} = JSON.parse(data)
             document.getElementById("alterarCodigo").value=codigo
@@ -151,30 +154,32 @@ async function loadAlterarProduto(codigo)
             alert(erro);
         })
 }
-function alterarProduto() {
+async function alterarProduto() {
+    console.log("alterarProduto")
     const json={}
     let form = document.getElementById("formAlterarProduto");
     let dataForm = new FormData(form);
     for ([name, value] of dataForm) {
         json[name] = value
     }
-    fetch("http://localhost:8080/produto", {
+
+
+    await fetch("http://localhost:8080/produto", {
         method: "PUT",
         body: JSON.stringify(json),
         headers: {
             'Content-Type': 'application/json'
         }
     })
-        .then(function (response) {
+        .then(await function (response) {
             return response.text()
         })
-        .then(function (data) {
-            loadCatalogo();
+        .then(await function (data) {
             alert(data)
-
         })
+        .then(loadCatalogo())
         .catch(function (erro) {
             alert(erro)
         })
-    form.reset()
+
 }

@@ -112,14 +112,6 @@ function apagarOF(id) {
                 alert(erro)
             })
     }
-    else{
-        printCatalogoOF()
-    }
-}
-async function atualizarBody(http) {
-    const resp = await fetch(http);
-    const html = await resp.text();
-    document.getElementById("bodyContent").innerHTML=html
 }
 async function loadCatalogoOF()
 {
@@ -171,13 +163,11 @@ function alterarOF() {
             return response.text()
         })
         .then(function (data) {
-            loadCatalogoOF();
             alert(data)
 
         })
         .catch(function (erro) {
             alert(erro)
         })
-    form.reset()
 }
 

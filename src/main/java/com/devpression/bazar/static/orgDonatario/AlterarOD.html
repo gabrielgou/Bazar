@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<form id="formAlterarOD">
+  <table class="table">
+    <tr><td>Id: <input readonly type="text" id="alterarId" name="id"></td></tr>
+    <tr><td>Nome: <input type="text" id="alterarNome" name="nome"></td></tr>
+    <tr><td>Endereço: <input type="text" id="alterarEndereco" name="endereco"></td></tr>
+    <tr><td>Telefone: <input type="text" id="alterarTelefone" name="telefone"></td></tr>
+    <tr><td>Horario De Funcionamento: <input type="text" id="alterarHorario" name="horarioFuncionamento"></td></tr>
+    <tr><td>Descrição: <input type="text" id="alterarDescrição" name="descricao"></td></tr>
+    <tr>
+      <td> <button class="btn btn-primary" onclick="Promise.resolve(alterarOD(),loadCatalogoOD())">Alterar</button></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
