@@ -33,7 +33,7 @@ async function printCatalogoProduto()
     let tabela1 = document.getElementById("tabelaCatalogoProduto")
     conteudoTabelaProduto.removeChild(tabela1)
     let tabela = document.createElement("table")
-    tabela.setAttribute("class", "table")
+    tabela.setAttribute("class", "uk-table uk-table-hover")
     tabela.setAttribute("id","tabelaCatalogoProduto" )
     let trhead = document.createElement("tr")
     let th1 = document.createElement("th")
@@ -68,10 +68,12 @@ async function printCatalogoProduto()
                 let td4 = document.createElement("td")
                 let bt1 = document.createElement("button")
                 //bt1.setAttribute("class", "btn btn-primary");
+                bt1.setAttribute("class", "uk-button uk-button-danger uk-button-small")
                 bt1.setAttribute("onclick", "apagarProduto("+codigo+")")
                 bt1.innerHTML="Apagar"
                 let bt2 = document.createElement("button")
                 //bt2.setAttribute("class", "btn btn-primary");
+                bt2.setAttribute("class", "uk-button uk-button-primary uk-button-small")
                 bt2.setAttribute("onclick", "loadAlterarProduto("+codigo+")")
                 bt2.innerHTML="Alterar"
                 td1.innerHTML=codigo

@@ -92,6 +92,7 @@ function printCatalogoOF()
             alert(erro)
         })
 
+
 }
 function apagarOF(id) {
     if(confirm("Você tem certeza que deseja apagar?")) {
