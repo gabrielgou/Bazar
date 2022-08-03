@@ -69,7 +69,7 @@ public class RepositorioOF implements RepositorioGenerico<OrgaoFiscalizador,Inte
         String sql = "select * from orgaofiscalizador";
         PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
         ResultSet result = pstm.executeQuery();
-        if(result.next())
+        while(result.next())
         {
             OrgaoFiscalizador of = new OrgaoFiscalizador();
             of.setId(result.getInt("id"));
