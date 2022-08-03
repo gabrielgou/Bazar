@@ -33,7 +33,7 @@ function printCatalogoOD()
     let tabela1 = document.getElementById("tabelaCatalogoOD")
     conteudoTabelaOD.removeChild(tabela1)
     let tabela = document.createElement("table")
-    tabela.setAttribute("class", "table")
+    tabela.setAttribute("class", "uk-table uk-table-hover")
     tabela.setAttribute("id","tabelaCatalogoOD" )
     let trhead = document.createElement("tr")
     let th1 = document.createElement("th")
@@ -80,10 +80,12 @@ function printCatalogoOD()
                 let td7 = document.createElement("td")
                 let bt1 = document.createElement("button")
                 //bt1.setAttribute("class", "btn btn-primary");
+                bt1.setAttribute("class", "uk-button uk-button-danger uk-button-small")
                 bt1.setAttribute("onclick", "apagarOD("+id+")")
                 bt1.innerHTML="Apagar"
                 let bt2 = document.createElement("button")
                 //bt2.setAttribute("class", "btn btn-primary");
+                bt2.setAttribute("class", "uk-button uk-button-primary uk-button-small")
                 bt2.setAttribute("onclick", "loadAlterarOD("+id+")")
                 bt2.innerHTML="Alterar"
                 td1.innerHTML=id
