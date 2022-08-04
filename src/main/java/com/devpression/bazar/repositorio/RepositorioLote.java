@@ -114,7 +114,7 @@ public class RepositorioLote implements RepositorioGenerico<Lote,Integer> {
             }
             if(enable==1) {
                 Lote l = new Lote();
-                l.setDataEntrega(new SimpleDateFormat("yyyy-MM-dd").parse(result.getString("dataentrega")));
+                l.setDataEntrega(result.getDate("dataentrega"));
                 l.setCodigo(result.getInt("codigo"));
                 l.setIdOD(result.getInt("id_od"));
                 l.setId(result.getInt("id_lote"));
@@ -122,7 +122,9 @@ public class RepositorioLote implements RepositorioGenerico<Lote,Integer> {
                 l.setObservacao(result.getString("observacao"));
                 l.setOrgaoDonatario(RepositorioOD.getCurrentInstance().read(l.getIdOD()));
                 l.setOrgaoFiscal(RepositorioOF.getCurrentInstance().read(l.getIdOF()));
-                l.getProduto().add(RepositorioProduto.getCurrentInstance().read(l.getCodigo()));
+                List<Produto> p = new ArrayList<>();
+                p.add(RepositorioProduto.getCurrentInstance().read(l.getCodigo()));
+                l.setProduto(p);
                 lotes.add(l);
             }
             enable=1;
