@@ -1,6 +1,7 @@
 package com.devpression.bazar.controller;
 
 import com.devpression.bazar.model.Lote;
+import com.devpression.bazar.model.Produto;
 import com.devpression.bazar.repositorio.RepositorioLote;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ public class LoteController {
     public ResponseEntity<?> create(@RequestBody Lote l)
     {
         try {
+            l.setDataEntrega(new Date());
             RepositorioLote.getCurrentInstance().create(l);
             return new ResponseEntity<>("Lote Adicionado",HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {

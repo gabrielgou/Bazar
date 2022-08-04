@@ -32,14 +32,14 @@ public class RepositorioLote implements RepositorioGenerico<Lote,Integer> {
         {
             lote.setId(result.getInt("id_lote")+1);
         }
-        for(Produto p:lote.getProduto()) {
+        for(Produto p: lote.getProduto()) {
             sql = "insert into lote(id_lote,dataentrega,observacao,id_od,codigo,id_of) values (?,?,?,?,?,?)";
             pstm  = ConnectionManager.getCurrentConnection().prepareStatement(sql);
             pstm.setInt(1,lote.getId());
-            pstm.setDate(2, (Date) lote.getDataEntrega());
+            pstm.setDate(2,  new Date(lote.getDataEntrega().getTime()));
             pstm.setString(3,lote.getObservacao());
             pstm.setInt(4,lote.getIdOD());
-            pstm.setInt(5,p.getCodigo());
+            pstm.setInt(5, p.getCodigo());
             pstm.setInt(6,lote.getIdOF());
             pstm.execute();
         }
@@ -69,7 +69,7 @@ public class RepositorioLote implements RepositorioGenerico<Lote,Integer> {
         {
             Lote l = new Lote();
             List<Produto> p = new ArrayList<>();
-            l.setDataEntrega(new SimpleDateFormat("yyyy-MM-dd").parse(result.getString("dataentrega")));
+            l.setDataEntrega(result.getDate("dataentrega"));
             l.setCodigo(result.getInt("codigo"));
             l.setIdOD(result.getInt("id_od"));
             l.setId(result.getInt("id_lote"));
@@ -78,8 +78,9 @@ public class RepositorioLote implements RepositorioGenerico<Lote,Integer> {
             l.setOrgaoDonatario(RepositorioOD.getCurrentInstance().read(l.getIdOD()));
             l.setOrgaoFiscal(RepositorioOF.getCurrentInstance().read(l.getIdOF()));
             p.add(RepositorioProduto.getCurrentInstance().read(l.getCodigo()));
-            while(result.next())
+            while(result.next()) {
                 p.add(RepositorioProduto.getCurrentInstance().read(result.getInt("codigo")));
+            }
             l.setProduto(p);
             return l;
         }

@@ -3,10 +3,28 @@ async function Cadastrarlote() {
     const json={}
     let form = document.getElementById("formCadastroLote");
     let dataForm = new FormData(form);
+    let produto=[]
+    let codigoPro=[]
+
+    let i=0
     for ([name, value] of dataForm) {
-        json[name] = value
-        dataForm.set(name,null)
+        if(name==="produto")
+        {
+            let jsonCod={}
+            console.log(value)
+            produto[i]=value
+            jsonCod["codigo"]=value
+            codigoPro[i]=jsonCod
+            i++
+        }
+        else{
+            json[name] = value
+        }
     }
+    console.log(codigoPro)
+    json["array"]=produto
+    json["produto"]=codigoPro
+    console.log(json)
     const resp = await fetch("http://localhost:8080/lote", {
         method: "POST",
         body: JSON.stringify(json),
@@ -51,6 +69,29 @@ async function loadCadastrarLote()
         optionOF.innerHTML=nome
         document.getElementById("selectOF").append(optionOF)
     })
+    const resp3 = await fetch("http://localhost:8080/produto", {
+        method: "GET",
+        headers: {
+            "Content-Type":"application/json"
+        }
+    })
+    const data3 = await resp3.text()
+    JSON.parse(data3).forEach(element=> {
+        let {codigo, nome, descricao} = element
+        let inputCodigo = document.createElement("input")
+        inputCodigo.setAttribute("type","checkbox")
+        inputCodigo.setAttribute("name","produto")
+        inputCodigo.setAttribute("class", "uk-checkbox")
+        inputCodigo.setAttribute("value",codigo)
+        let label = document.createElement("label")
+        label.append(inputCodigo)
+        label.insertAdjacentHTML("beforeend",nome)
+        let br = document.createElement("BR")
+        let div=document.getElementById("checkboxProduto")
+        div.append(label)
+        div.insertBefore(br,label)
+    })
+
 
 }
 
