@@ -147,3 +147,58 @@ h1{
 .menu li:hover ul, .menu li.over ul{display:block;}
 
 .menu li ul li{border:1px solid #c0c0c0; display:block; width:150px;}
+
+.cartao{
+    border: 1px solid #fff;
+    height: 27px;
+    width: 27px;
+    display: flex;
+    border-radius: 5px;
+    overflow: hidden;
+    background: aqua;
+    justify-content: space-between;
+    transition: 0.75s;
+}
+.cartao:hover{
+    width: 200px;
+    transition: 0.75s;
+}
+.cartao:hover .user-detail{
+    width: 100%;
+}
+
+.user-detail{
+    position: relative;
+    width: 27px;
+    height: 27px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    transition: 0.75s;
+}
+
+.image{
+    height: 27px;
+    min-width: 27px;
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.image img{
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    object-fit: contain;
+}
+
+.detalheCard{
+    font-size: 1.2em;
+    float: left;
+    white-space: nowrap;
+    margin: 15px;
+    font-weight: bold;
+}
