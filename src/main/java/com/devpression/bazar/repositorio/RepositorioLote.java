@@ -47,7 +47,7 @@ public class RepositorioLote implements RepositorioGenerico<Lote,Integer> {
 
     @Override
     public void update(Lote lote) throws SQLException, ClassNotFoundException {
-        String sql = "update lote set dataentrega=?,observaca=?,id_od=?,codigo=?,id_of=? where id=?";
+        String sql = "update lote set dataentrega=?,observaca=?,id_od=?,codigo=?,id_of=? where id_lote=?";
         PreparedStatement pstm  = ConnectionManager.getCurrentConnection().prepareStatement(sql);
         pstm.setDate(1, (Date) lote.getDataEntrega());
         pstm.setString(2,lote.getObservacao());
