@@ -149,8 +149,8 @@ h1{
 
 .cartao{
     border: 1px solid #fff;
-    height: 30px;
-    width: 30px;
+    height: 27px;
+    width: 27px;
     display: flex;
     border-radius: 5px;
     overflow: hidden;
@@ -168,8 +168,8 @@ h1{
 
 .user-detail{
     position: relative;
-    width: 30px;
-    height: 30px;
+    width: 27px;
+    height: 27px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -178,8 +178,8 @@ h1{
 }
 
 .image{
-    height: 30px;
-    min-width: 30px;
+    height: 27px;
+    min-width: 27px;
     position: relative;
     padding: 0;
     overflow: hidden;
