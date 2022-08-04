@@ -1,6 +1,7 @@
 package com.devpression.bazar.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Lote {
     private int id;
@@ -11,7 +12,7 @@ public class Lote {
     private int codigo;
     OrgaoDonatario orgaoDonatario=null;
     OrgaoFiscalizador orgaoFiscal = null;
-    Produto produto = null;
+    List<Produto> produto = null;
 
     public int getId() {
         return id;
@@ -77,11 +78,11 @@ public class Lote {
         this.orgaoFiscal = orgaoFiscal;
     }
 
-    public Produto getProduto() {
+    public List<Produto> getProduto() {
         return produto;
     }
 
-    public void setProduto(Produto produto) {
+    public void setProduto(List<Produto> produto) {
         this.produto = produto;
     }
 }

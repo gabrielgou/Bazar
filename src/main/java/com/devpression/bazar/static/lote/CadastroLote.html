@@ -9,20 +9,16 @@
    <table class="table" id="tabelaForm">
     <tr>
         <td>
-            <label class="uk-form-label" for="idOD">Orgão Donatário</label>
-                <select class="uk-select uk-form-width-medium" id="idOD">
-                    <option>OD 1</option>
-                    <option>OD 2</option>
+            <label class="uk-form-label" for="selectOD">Orgão Donatário</label>
+                <select class="uk-select uk-form-width-medium" id="selectOD" name="idOD">
                 </select>
         </td>
     </tr>
 
     <tr>
         <td>
-            <label class="uk-form-label" for="idOF">Orgão Fiscalizador</label>
-               <select class="uk-select uk-form-width-medium" id="idOF">
-                   <option>OF 1</option>
-                   <option>OF 2</option>
+            <label class="uk-form-label" for="selectOF">Orgão Fiscalizador</label>
+               <select class="uk-select uk-form-width-medium" id="selectOF" name="idOF">
                </select>
         </td>
     </tr>
@@ -44,7 +40,7 @@
     </tr>
 
     <tr>
-        <td> <button id="cadastrarLote" type="button" class="btn btn-primary" onclick="CadastrarLote()">Cadastrar</button></td>
+        <td> <button id="cadastrarLote" type="button" class="btn btn-primary" onclick="loadCadastrarLote()">Cadastrar</button></td>
     </tr>
 
 </table>
