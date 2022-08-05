@@ -18,7 +18,7 @@
 
 
 </head>
-<body id="teste">
+<body id="body">
     <nav>
         <ul class="menu">
             <li><a href="#" onclick="document.getElementById('bodyContent').innerHTML=''">Home</a> </li>
@@ -48,7 +48,28 @@
                     <li><a href="#" onclick="loadCatalogoLote()">Catálogo de Lotes</a> </li>
                 </ul>
             </li>
-            <li><a href="#">Logout</a></li>
+            <li>
+                <a href="#" uk-toggle="target: .cartao">Autores</a>
+            <li>
+                <div class = "cartao" hidden>
+                    <div class="user-detail">
+                        <div class="image">
+                            <img src="https://pps.whatsapp.net/v/t61.24694-24/185204289_1259356187825996_7577122103884336766_n.jpg?ccb=11-4&oh=01_AVxR4lihImsqfVFMnAOEN9bcp9hXotR5E_UdUXkvXEPPbA&oe=62FA6E32" >
+                        </div>
+                        <p class="detalheCard">Raphael Alcântara</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class = "cartao" hidden>
+                    <div class="user-detail">
+                        <div class="image">
+                            <img src="https://pps.whatsapp.net/v/t61.24694-24/67987367_528521071067023_374049541861809574_n.jpg?ccb=11-4&oh=01_AVxoa-iRLFKJ4hEW_bx-EXs7xXjg3Lz2kpZtu-w8OtnXWA&oe=62F96D5E" >
+                        </div>
+                        <p class="detalheCard">Gabriel Gouveia</p>
+                    </div>
+                </div>
+            </li>
         </ul>
     </nav>
 
