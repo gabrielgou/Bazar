@@ -1,8 +1,7 @@
 package com.devpression.bazar.controller;
 
 import com.devpression.bazar.model.Lote;
-import com.devpression.bazar.model.Produto;
-import com.devpression.bazar.repositorio.RepositorioLote;
+import com.devpression.bazar.repositorio.RepositorioFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +20,7 @@ public class LoteController {
     {
         try {
             l.setDataEntrega(new Date());
-            RepositorioLote.getCurrentInstance().create(l);
+            RepositorioFactory.Lote.getInstance().create(l);
             return new ResponseEntity<>("Lote Adicionado",HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -33,7 +32,7 @@ public class LoteController {
     public ResponseEntity<Lote> read(@PathVariable("id") int id)
     {
         try {
-            Lote of = RepositorioLote.getCurrentInstance().read(id);
+            Lote of = (Lote) RepositorioFactory.Lote.getInstance().read(id);
             if(of!=null)
                 return new ResponseEntity<>(of,HttpStatus.OK);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -46,7 +45,7 @@ public class LoteController {
     public ResponseEntity<?> delete(@PathVariable("id") int id)
     {
         try {
-            RepositorioLote.getCurrentInstance().delete(id);
+            RepositorioFactory.Lote.getInstance().delete(id);
             return new ResponseEntity<>("Lote Deletado",HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -57,7 +56,7 @@ public class LoteController {
     public ResponseEntity<?> update(@RequestBody Lote of)
     {
         try {
-            RepositorioLote.getCurrentInstance().update(of);
+            RepositorioFactory.Lote.getInstance().update(of);
             return new ResponseEntity<>("Lote Alterado",HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -69,7 +68,7 @@ public class LoteController {
     public ResponseEntity<List<Lote>> readAll()
     {
         try {
-            List<Lote> p = RepositorioLote.getCurrentInstance().readAll();
+            List<Lote> p = RepositorioFactory.Lote.getInstance().readAll();
             if(p!=null)
                 return new ResponseEntity<>(p,HttpStatus.OK);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);

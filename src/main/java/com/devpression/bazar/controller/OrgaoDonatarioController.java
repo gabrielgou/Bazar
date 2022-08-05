@@ -1,13 +1,14 @@
 package com.devpression.bazar.controller;
 
 import com.devpression.bazar.model.OrgaoDonatario;
+import com.devpression.bazar.repositorio.RepositorioFactory;
 import com.devpression.bazar.repositorio.RepositorioOD;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -17,7 +18,7 @@ public class OrgaoDonatarioController {
     public ResponseEntity<?> create(@RequestBody OrgaoDonatario od)
     {
         try {
-            RepositorioOD.getCurrentInstance().create(od);
+            RepositorioFactory.OrgaoDonatario.getInstance().create(od);
             return new ResponseEntity<>("Orgão Donatario Adicionado",HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -29,11 +30,11 @@ public class OrgaoDonatarioController {
     public ResponseEntity<OrgaoDonatario> read(@PathVariable("id") int id)
     {
         try {
-            OrgaoDonatario od = RepositorioOD.getCurrentInstance().read(id);
+            OrgaoDonatario od = (OrgaoDonatario) RepositorioFactory.OrgaoDonatario.getInstance().read(id);
             if(od!=null)
                 return new ResponseEntity<>(od,HttpStatus.OK);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException | ParseException e) {
             throw  new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
@@ -42,7 +43,7 @@ public class OrgaoDonatarioController {
     public ResponseEntity<?> delete(@PathVariable("id") int id)
     {
         try {
-            RepositorioOD.getCurrentInstance().delete(id);
+            RepositorioFactory.OrgaoDonatario.getInstance().delete(id);
             return new ResponseEntity<>("Orgão Donatario Excluido",HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -53,7 +54,7 @@ public class OrgaoDonatarioController {
     public ResponseEntity<?> update(@RequestBody OrgaoDonatario p)
     {
         try {
-            RepositorioOD.getCurrentInstance().update(p);
+            RepositorioFactory.OrgaoDonatario.getInstance().update(p);
             return new ResponseEntity<>("Orgão Donatário Alterado",HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -65,11 +66,11 @@ public class OrgaoDonatarioController {
     public ResponseEntity<List<OrgaoDonatario>> readAll()
     {
         try {
-            List<OrgaoDonatario> p = RepositorioOD.getCurrentInstance().readAll();
+            List<OrgaoDonatario> p = RepositorioFactory.OrgaoDonatario.getInstance().readAll();
             if(p!=null)
                 return new ResponseEntity<>(p,HttpStatus.OK);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException | ParseException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }

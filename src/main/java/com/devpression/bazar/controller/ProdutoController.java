@@ -1,6 +1,7 @@
 package com.devpression.bazar.controller;
 
 import com.devpression.bazar.model.Produto;
+import com.devpression.bazar.repositorio.RepositorioFactory;
 import com.devpression.bazar.repositorio.RepositorioProduto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -17,7 +19,7 @@ public class ProdutoController {
     public ResponseEntity<?> create(@RequestBody Produto produto)
     {
         try {
-            RepositorioProduto.getCurrentInstance().create(produto);
+            RepositorioFactory.Produto.getInstance().create(produto);
             return new ResponseEntity<>("Cadastrado com Sucesso",HttpStatus.CREATED);
         } catch (SQLException | ClassNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -29,11 +31,11 @@ public class ProdutoController {
     public ResponseEntity<Produto> read(@PathVariable("codigo") int codigo)
     {
         try {
-            Produto p = RepositorioProduto.getCurrentInstance().read(codigo);
+            Produto p = (Produto) RepositorioFactory.Produto.getInstance().read(codigo);
             if(p!=null)
                 return new ResponseEntity<>(p,HttpStatus.OK);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException | ParseException e) {
             throw  new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
@@ -42,7 +44,7 @@ public class ProdutoController {
     public ResponseEntity<?> delete(@PathVariable("codigo") int codigo)
     {
         try {
-            RepositorioProduto.getCurrentInstance().delete(codigo);
+            RepositorioFactory.Produto.getInstance().delete(codigo);
             return new ResponseEntity<>("Produto Apagado", HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -53,7 +55,7 @@ public class ProdutoController {
     public ResponseEntity<?> update(@RequestBody Produto p)
     {
         try {
-            RepositorioProduto.getCurrentInstance().update(p);
+            RepositorioFactory.Produto.getInstance().update(p);
             return new ResponseEntity<>("Produto Atualizado", HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -65,11 +67,11 @@ public class ProdutoController {
     public ResponseEntity<List<Produto>> readAll()
     {
         try {
-            List<Produto> p = RepositorioProduto.getCurrentInstance().readAll();
+            List<Produto> p = RepositorioFactory.Produto.getInstance().readAll();
             if(p!=null)
                 return new ResponseEntity<>(p,HttpStatus.OK);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException | ParseException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
