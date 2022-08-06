@@ -2,63 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tela Cliente</title>
-
+    <title>TelaCliente</title>
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.1/dist/css/uikit.min.css" />
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.1/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.1/dist/js/uikit-icons.min.js"></script>
+    <!-- CSS Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="script/modelPattern.js"></script>
+    <script async src="script/admProduto.js"></script>
+    <script async src="script/admOF.js"></script>
+    <script async src="script/admOD.js"></script>
+    <script async src="script/admLote.js"></script>
+    <script async src="script/clienteLote.js"></script>
+
+    <link href="style/admIndex.css" type="text/css" rel="stylesheet"/>
+
+
 </head>
-<body>
-
-<div uk-filter="target: .js-filter">
-
-    <ul class="uk-subnav uk-subnav-pill">
-        <li class="uk-active" uk-filter-control><a href="#">All</a></li>
-        <li uk-filter-control="[data-value='OD']"><a href="#">OD</a></li>
-        <li uk-filter-control="[data-value='OF']"><a href="#">OF</a></li>
-    </ul>
-
-    <ul class="js-filter uk-child-width-1-2 uk-child-width-1-3@m uk-text-center" uk-grid>
-        <li data-value="OD">
-            <div class="uk-card uk-card-default uk-card-body">OD</div>
+<body id="body">
+<nav>
+    <ul class="menu">
+        <li><a href="#" onclick="document.getElementById('bodyContent').innerHTML=''">Home</a> </li>
+        <li>
+            <a href="#">Lotes</a>
+            <ul>
+                <li><a href="#" onclick="loadCatalogoLoteCliente()">Catálogo de Lotes</a> </li>
+            </ul>
         </li>
-        <li data-value="OF">
-            <div class="uk-card uk-card-primary uk-card-body">OF</div>
+        <li>
+            <a href="#" uk-toggle="target: .cartao">Autores</a>
+        <li>
+            <div class = "cartao" hidden>
+                <div class="user-detail">
+                    <div class="image">
+                        <img src="https://pps.whatsapp.net/v/t61.24694-24/185204289_1259356187825996_7577122103884336766_n.jpg?ccb=11-4&oh=01_AVxR4lihImsqfVFMnAOEN9bcp9hXotR5E_UdUXkvXEPPbA&oe=62FA6E32" >
+                    </div>
+                    <p class="detalheCard">Raphael Alcântara</p>
+                </div>
+            </div>
         </li>
-        <li data-value="OD">
-            <div class="uk-card uk-card-default uk-card-body">OD</div>
-        </li>
-        <li data-value="OD">
-            <div class="uk-card uk-card-default uk-card-body">OD</div>
-        </li>
-        <li data-value="OF">
-            <div class="uk-card uk-card-secondary uk-card-body">OF</div>
-        </li>
-        <li data-value="OF">
-            <div class="uk-card uk-card-secondary uk-card-body">OF</div>
-        </li>
-        <li data-value="OF">
-            <div class="uk-card uk-card-primary uk-card-body">OF</div>
-        </li>
-        <li data-value="OD">
-            <div class="uk-card uk-card-secondary uk-card-body">OD</div>
-        </li>
-        <li data-value="OF">
-            <div class="uk-card uk-card-primary uk-card-body">OF</div>
-        </li>
-        <li data-value="OD">
-            <div class="uk-card uk-card-default uk-card-body">OD</div>
-        </li>
-        <li data-value="OD">
-            <div class="uk-card uk-card-primary uk-card-body">OD</div>
-        </li>
-        <li data-value="OF">
-            <div class="uk-card uk-card-secondary uk-card-body">OF</div>
+        <li>
+            <div class = "cartao" hidden>
+                <div class="user-detail">
+                    <div class="image">
+                        <img src="https://pps.whatsapp.net/v/t61.24694-24/67987367_528521071067023_374049541861809574_n.jpg?ccb=11-4&oh=01_AVxoa-iRLFKJ4hEW_bx-EXs7xXjg3Lz2kpZtu-w8OtnXWA&oe=62F96D5E" >
+                    </div>
+                    <p class="detalheCard">Gabriel Gouveia</p>
+                </div>
+            </div>
         </li>
     </ul>
+</nav>
 
+<div id="bodyContent">
 </div>
 
 </body>
