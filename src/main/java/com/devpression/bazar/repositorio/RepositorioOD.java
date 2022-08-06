@@ -96,17 +96,5 @@ public class RepositorioOD implements RepositorioGenerico<OrgaoDonatario,Integer
         return ods;
     }
 
-    public List<OrgaoDonatario> filter(String string) throws SQLException, ClassNotFoundException, ParseException {
-        String sql = "Select * from lote as l inner join orgaodonatario as od on l.codigo = od.id and od.nome like ?";
-        PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
-        pstm.setString(1, "%%"+string+"%%");
-        List<OrgaoDonatario> ODs = new ArrayList<>();
-        ResultSet result = pstm.executeQuery();
-        int enable=1;
-        while(result.next())
-        {
-            ODs.add(this.read(result.getInt("id_lote")));
-        }
-        return ODs;
-    }
+
 }
