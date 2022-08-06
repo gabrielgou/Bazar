@@ -22,7 +22,7 @@
 <body id="body">
 <nav>
     <ul class="menu">
-        <li><a href="#" onclick="loadCatalogoLoteCliente()">Refresh</a> </li>
+
         <li>
             <a href="#" uk-toggle="target: .cartao">Autores</a>
         <li>
@@ -46,9 +46,18 @@
             </div>
         </li>
         <li>
+            <label class="uk-form-label" for="selectFilter"></label>
+            <select class="uk-select uk-form-width-medium" id="selectFilter" name="filterSelect" style="height: 28px">
+                <option value=""></option>
+                <option value="">Produto</option>
+                <option value="">OF</option>
+                <option value="">OD</option>
+            </select>
+        </li>
+        <li>
             <form class="uk-search uk-search-default" style="height: 28px">
                 <span uk-search-icon style="height: 28px"></span>
-                <input id="inputSearch" class="uk-search-input" type="search" placeholder="Search" style="height: 28px" onkeyup="printCatalogoLoteCliente()">
+                <input id="inputSearch" class="uk-search-input" type="search" placeholder="Buscar" style="height: 28px" onkeyup="printCatalogoLoteCliente()">
             </form>
         </li>
     </ul>
