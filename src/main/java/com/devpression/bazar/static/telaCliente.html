@@ -15,7 +15,6 @@
     <script async src="script/admOF.js"></script>
     <script async src="script/admOD.js"></script>
     <script async src="script/clienteLote.js"></script>
-
     <link href="style/admIndex.css" type="text/css" rel="stylesheet"/>
 
 
@@ -23,7 +22,7 @@
 <body id="body">
 <nav>
     <ul class="menu">
-        <li><a href="#" onclick="loadCatalogoLote()">Refresh</a> </li>
+        <li><a href="#" onclick="loadCatalogoLoteCliente()">Refresh</a> </li>
         <li>
             <a href="#" uk-toggle="target: .cartao">Autores</a>
         <li>
@@ -49,7 +48,7 @@
         <li>
             <form class="uk-search uk-search-default" style="height: 28px">
                 <span uk-search-icon style="height: 28px"></span>
-                <input id="inputSearch" class="uk-search-input" type="search" placeholder="Search" style="height: 28px" onkeypress="printCatalogoLoteCliente()">
+                <input id="inputSearch" class="uk-search-input" type="search" placeholder="Search" style="height: 28px" onkeyup="printCatalogoLoteCliente()">
             </form>
         </li>
     </ul>
