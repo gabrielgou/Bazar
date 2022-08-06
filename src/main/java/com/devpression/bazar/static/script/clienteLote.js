@@ -2,13 +2,23 @@ async function printCatalogoLoteCliente()
 {
     console.log("printCatalogoLote")
     let ulLote = document.getElementById("ulLote")
+    let inputSearch = document.getElementById("inputSearch")
     ulLote.innerHTML=""
+    if(inputSearch.value==""){
     const resp = await fetch("http://localhost:8080/lote", {
         method: "GET",
         headers: {
             "Content-Type":"application/json"
         }
-    })
+    })}
+    else{
+        const resp = await fetch("http://localhost:8080/lote/produto/"+inputSearch.value, {
+            method: "GET",
+            headers: {
+                "Content-Type":"application/json"
+            }
+        })
+    }
     const data = await resp.text()
     JSON.parse(data).forEach(element=> {
         let {id, dataEntrega, observacao, idOD, idOF, codigo, orgaoDonatario, orgaoFiscal, produto} = element
@@ -80,9 +90,7 @@ async function loadCatalogoLoteCliente()
     printCatalogoLoteCliente();
 }
 
-async function FiltrarLoteCliente(){
 
-}
 
 
 
