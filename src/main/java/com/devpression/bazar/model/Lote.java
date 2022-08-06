@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Lote {
     private int id;
-    private Date dataEntrega;
+    private Long dataEntrega;
     private String observacao;
     private int idOD;
     private int idOF;
@@ -22,11 +22,11 @@ public class Lote {
         this.id = id;
     }
 
-    public Date getDataEntrega() {
+    public Long getDataEntrega() {
         return dataEntrega;
     }
 
-    public void setDataEntrega(Date dataEntrega) {
+    public void setDataEntrega(Long dataEntrega) {
         this.dataEntrega = dataEntrega;
     }
 

@@ -20,7 +20,7 @@ public class LoteController {
     public ResponseEntity<?> create(@RequestBody Lote l)
     {
         try {
-            l.setDataEntrega(new Date());
+            l.setDataEntrega(new Date().getTime());
             RepositorioFactory.Lote.getInstance().create(l);
             return new ResponseEntity<>("Lote Adicionado",HttpStatus.OK);
         } catch (SQLException | ClassNotFoundException e) {
@@ -46,9 +46,14 @@ public class LoteController {
     public ResponseEntity<?> delete(@PathVariable("id") int id)
     {
         try {
-            RepositorioFactory.Lote.getInstance().delete(id);
-            return new ResponseEntity<>("Lote Deletado",HttpStatus.OK);
-        } catch (SQLException | ClassNotFoundException e) {
+            Lote l = (Lote) RepositorioFactory.Lote.getInstance().read(id);
+            Long atualTime=new Date().getTime();
+            if(atualTime-l.getDataEntrega()<=1800000) {
+                RepositorioFactory.Lote.getInstance().delete(id);
+                return new ResponseEntity<>("Lote Deletado",HttpStatus.OK);
+            }
+            return new ResponseEntity<>("Tempo Expirado! acima de 30 min",HttpStatus.BAD_REQUEST);
+        } catch (SQLException | ClassNotFoundException | ParseException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
@@ -92,6 +97,4 @@ public class LoteController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
-
-
 }

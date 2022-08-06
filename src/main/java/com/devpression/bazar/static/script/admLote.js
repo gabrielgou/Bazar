@@ -96,7 +96,6 @@ async function printCatalogoLote()
 {
     console.log("printCatalogoLote")
     let ulLote = document.getElementById("ulLote")
-    ulLote.innerHTML=""
     const resp = await fetch("http://localhost:8080/lote", {
         method: "GET",
         headers: {
@@ -104,12 +103,20 @@ async function printCatalogoLote()
         }
     })
     const data = await resp.text()
+    ulLote.innerHTML=""
     JSON.parse(data).forEach(element=> {
         let {id, dataEntrega, observacao, idOD, idOF, codigo, orgaoDonatario, orgaoFiscal, produto} = element
         let li = document.createElement("li")
+        let obs = document.createElement("p")
+        obs.innerHTML="Observação: "
+        obs.insertAdjacentHTML("beforeend", observacao)
         console.log(orgaoFiscal.nome)
         li.setAttribute("data-value","OD")
         let div = document.createElement("div")
+        let apagar = document.createElement("button")
+        apagar.innerHTML="Apagar"
+        apagar.setAttribute("onclick", "apagarLote("+id+")")
+        apagar.setAttribute("class", "btn btn-primary")
         div.setAttribute("class", "uk-card uk-card-default uk-card-body")
         div.innerHTML="ID: "+id
         let ulOD = document.createElement("ul")
@@ -126,7 +133,7 @@ async function printCatalogoLote()
         ulOF.appendChild(liOF)
         let ulP = document.createElement("ul")
         ulP.setAttribute("class", "uk-card uk-card-default uk-card-body")
-        ulP.style["font-size"] = "small"
+        //ulP.style["font-size"] = "small"
         ulP.innerHTML = "Produtos"
         let tabela = document.createElement("table")
         tabela.setAttribute("class", "uk-table uk-table-hover")
@@ -134,7 +141,6 @@ async function printCatalogoLote()
         let th1 = document.createElement("th")
         let th2 = document.createElement("th")
         let th3 = document.createElement("th")
-        let th4 = document.createElement("th")
         th1.innerHTML = "Código"
         th2.innerHTML = "Nome"
         th3.innerHTML = "Descrição"
@@ -155,11 +161,12 @@ async function printCatalogoLote()
             tr.appendChild(td2)
             tr.appendChild(td3)
             tabela.appendChild(tr)
-
         })
         div.appendChild(ulOD)
         div.appendChild(ulOF)
         div.appendChild(ulP)
+        ulP.appendChild(obs)
+        ulP.appendChild(apagar)
         li.appendChild(div)
         ulLote.appendChild(li)
     })
@@ -172,6 +179,19 @@ async function loadCatalogoLote()
     const html = await resp.text()
     document.getElementById("bodyContent").innerHTML=html
     printCatalogoLote();
+}
+async function apagarLote(id) {
+    if(confirm("Você tem certeza que deseja apagar?")) {
+        const resp = await fetch("http://localhost:8080/lote/" + id, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        const data = await resp.text()
+        alert(data)
+        printCatalogoLote()
+    }
 }
 
 

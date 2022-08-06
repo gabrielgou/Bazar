@@ -35,7 +35,7 @@ public class RepositorioLote implements RepositorioGenerico<Lote,Integer> {
             sql = "insert into lote(id_lote,dataentrega,observacao,id_od,codigo,id_of) values (?,?,?,?,?,?)";
             pstm  = ConnectionManager.getCurrentConnection().prepareStatement(sql);
             pstm.setInt(1,lote.getId());
-            pstm.setDate(2,  new Date(lote.getDataEntrega().getTime()));
+            pstm.setLong(2,  lote.getDataEntrega());
             pstm.setString(3,lote.getObservacao());
             pstm.setInt(4,lote.getIdOD());
             pstm.setInt(5, p.getCodigo());
@@ -48,7 +48,7 @@ public class RepositorioLote implements RepositorioGenerico<Lote,Integer> {
     public void update(Lote lote) throws SQLException, ClassNotFoundException {
         String sql = "update lote set dataentrega=?,observaca=?,id_od=?,codigo=?,id_of=? where id_lote=?";
         PreparedStatement pstm  = ConnectionManager.getCurrentConnection().prepareStatement(sql);
-        pstm.setDate(1, (Date) lote.getDataEntrega());
+        pstm.setLong(1, lote.getDataEntrega());
         pstm.setString(2,lote.getObservacao());
         pstm.setInt(3,lote.getIdOD());
         pstm.setInt(4,lote.getCodigo());
@@ -68,7 +68,7 @@ public class RepositorioLote implements RepositorioGenerico<Lote,Integer> {
         {
             Lote l = new Lote();
             List<Produto> p = new ArrayList<>();
-            l.setDataEntrega(result.getDate("dataentrega"));
+            l.setDataEntrega(result.getLong("dataentrega"));
             l.setCodigo(result.getInt("codigo"));
             l.setIdOD(result.getInt("id_od"));
             l.setId(result.getInt("id_lote"));
@@ -129,7 +129,7 @@ public class RepositorioLote implements RepositorioGenerico<Lote,Integer> {
             }
             if(enable==1) {
                 Lote l = new Lote();
-                l.setDataEntrega(result.getDate("dataentrega"));
+                l.setDataEntrega(result.getLong("dataentrega"));
                 l.setCodigo(result.getInt("codigo"));
                 l.setIdOD(result.getInt("id_od"));
                 l.setId(result.getInt("id_lote"));
