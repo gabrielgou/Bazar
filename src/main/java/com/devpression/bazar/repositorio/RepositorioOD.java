@@ -1,11 +1,13 @@
 package com.devpression.bazar.repositorio;
 
 import com.devpression.bazar.handle.ConnectionManager;
+import com.devpression.bazar.model.Lote;
 import com.devpression.bazar.model.OrgaoDonatario;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,5 +94,19 @@ public class RepositorioOD implements RepositorioGenerico<OrgaoDonatario,Integer
             ods.add(od);
         }
         return ods;
+    }
+
+    public List<OrgaoDonatario> filter(String string) throws SQLException, ClassNotFoundException, ParseException {
+        String sql = "Select * from lote as l inner join orgaodonatario as od on l.codigo = od.id and od.nome like ?";
+        PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
+        pstm.setString(1, "%%"+string+"%%");
+        List<OrgaoDonatario> ODs = new ArrayList<>();
+        ResultSet result = pstm.executeQuery();
+        int enable=1;
+        while(result.next())
+        {
+            ODs.add(this.read(result.getInt("id_lote")));
+        }
+        return ODs;
     }
 }

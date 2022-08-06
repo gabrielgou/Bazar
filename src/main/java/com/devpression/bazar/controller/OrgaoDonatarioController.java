@@ -1,7 +1,9 @@
 package com.devpression.bazar.controller;
 
+import com.devpression.bazar.model.Lote;
 import com.devpression.bazar.model.OrgaoDonatario;
 import com.devpression.bazar.repositorio.RepositorioFactory;
+import com.devpression.bazar.repositorio.RepositorioLote;
 import com.devpression.bazar.repositorio.RepositorioOD;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -67,6 +69,20 @@ public class OrgaoDonatarioController {
     {
         try {
             List<OrgaoDonatario> p = RepositorioFactory.OrgaoDonatario.getInstance().readAll();
+            if(p!=null)
+                return new ResponseEntity<>(p,HttpStatus.OK);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } catch (SQLException | ClassNotFoundException | ParseException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @CrossOrigin("*")
+    @GetMapping("/lote/orgaoDonatario/{nome}")
+    public ResponseEntity<?> filter(@PathVariable("nome") String nome)
+    {
+        try {
+            List<OrgaoDonatario> p = RepositorioOD.getCurrentInstance().filter(nome);
             if(p!=null)
                 return new ResponseEntity<>(p,HttpStatus.OK);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
