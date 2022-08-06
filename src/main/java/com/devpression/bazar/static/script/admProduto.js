@@ -48,8 +48,10 @@ async function printCatalogoProduto()
         }
     })
     const data = await resp.text()
-    JSON.parse(data).forEach(element=> {
-        let {codigo, nome, descricao} = element
+    let Iterator = criaIterator(JSON.parse(data))
+    while(Iterator.next())
+    {
+        //let {codigo, nome, descricao} = element
         let tr = document.createElement("tr")
         let td1 = document.createElement("th")
         let td2 = document.createElement("td")
@@ -58,16 +60,16 @@ async function printCatalogoProduto()
         let bt1 = document.createElement("button")
         //bt1.setAttribute("class", "btn btn-primary");
         bt1.setAttribute("class", "uk-button uk-button-danger uk-button-small")
-        bt1.setAttribute("onclick", "apagarProduto(" + codigo + ")")
+        bt1.setAttribute("onclick", "apagarProduto(" + Iterator.getString("codigo") + ")")
         bt1.innerHTML = "Apagar"
         let bt2 = document.createElement("button")
         //bt2.setAttribute("class", "btn btn-primary");
         bt2.setAttribute("class", "uk-button uk-button-primary uk-button-small")
-        bt2.setAttribute("onclick", "loadAlterarProduto(" + codigo + ")")
+        bt2.setAttribute("onclick", "loadAlterarProduto(" + Iterator.getString("codigo") + ")")
         bt2.innerHTML = "Alterar"
-        td1.innerHTML = codigo
-        td2.innerHTML = nome
-        td3.innerHTML = descricao
+        td1.innerHTML = Iterator.getString("codigo")
+        td2.innerHTML = Iterator.getString("nome")
+        td3.innerHTML = Iterator.getString("descricao")
         td4.appendChild(bt1)
         td4.appendChild(bt2)
         tr.appendChild(td1)
@@ -76,7 +78,7 @@ async function printCatalogoProduto()
         tr.appendChild(td4)
         tabela.appendChild(tr);
         conteudoTabelaProduto.appendChild(tabela)
-    })
+    }
 }
 async function apagarProduto(codigo) {
     console.log("ApagarProduto")
