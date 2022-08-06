@@ -2,6 +2,7 @@ package com.devpression.bazar.controller;
 
 import com.devpression.bazar.model.Lote;
 import com.devpression.bazar.repositorio.RepositorioFactory;
+import com.devpression.bazar.repositorio.RepositorioLote;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -64,6 +65,21 @@ public class LoteController {
     }
 
     @CrossOrigin("*")
+    @GetMapping("/lote/produto/{nome}")
+    public ResponseEntity<?> filter(@PathVariable("nome") String nome)
+    {
+        try {
+            List<Lote> p = RepositorioLote.getCurrentInstance().filter(nome);
+            if(p!=null)
+                return new ResponseEntity<>(p,HttpStatus.OK);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+    @CrossOrigin("*")
     @GetMapping("/lote")
     public ResponseEntity<List<Lote>> readAll()
     {
@@ -76,4 +92,6 @@ public class LoteController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
+
+
 }

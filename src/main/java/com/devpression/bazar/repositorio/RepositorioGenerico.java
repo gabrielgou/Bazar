@@ -9,5 +9,7 @@ public interface RepositorioGenerico<T,I> {
     public void update(T t) throws SQLException, ClassNotFoundException;
     public T read(I i) throws SQLException, ClassNotFoundException, ParseException;
     public void delete(I i) throws SQLException, ClassNotFoundException;
+
     public List<T> readAll() throws SQLException, ClassNotFoundException, ParseException;
+
 }

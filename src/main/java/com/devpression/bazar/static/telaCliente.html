@@ -14,7 +14,6 @@
     <script async src="script/admProduto.js"></script>
     <script async src="script/admOF.js"></script>
     <script async src="script/admOD.js"></script>
-    <script async src="script/admLote.js"></script>
     <script async src="script/clienteLote.js"></script>
 
     <link href="style/admIndex.css" type="text/css" rel="stylesheet"/>
@@ -24,13 +23,7 @@
 <body id="body">
 <nav>
     <ul class="menu">
-        <li><a href="#" onclick="document.getElementById('bodyContent').innerHTML=''">Home</a> </li>
-        <li>
-            <a href="#">Lotes</a>
-            <ul>
-                <li><a href="#" onclick="loadCatalogoLoteCliente()">Catálogo de Lotes</a> </li>
-            </ul>
-        </li>
+        <li><a href="#" onclick="loadCatalogoLote()">Refresh</a> </li>
         <li>
             <a href="#" uk-toggle="target: .cartao">Autores</a>
         <li>
@@ -52,6 +45,12 @@
                     <p class="detalheCard">Gabriel Gouveia</p>
                 </div>
             </div>
+        </li>
+        <li>
+            <form class="uk-search uk-search-default" style="height: 28px">
+                <span uk-search-icon style="height: 28px"></span>
+                <input id="inputSearch" class="uk-search-input" type="search" placeholder="Search" style="height: 28px" onkeypress="Enter()">
+            </form>
         </li>
     </ul>
 </nav>

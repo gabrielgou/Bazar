@@ -14,7 +14,7 @@ async function printCatalogoLoteCliente()
         let {id, dataEntrega, observacao, idOD, idOF, codigo, orgaoDonatario, orgaoFiscal, produto} = element
         let li = document.createElement("li")
         console.log(orgaoFiscal.nome)
-        li.setAttribute("data-value","OD")
+        li.setAttribute("value","OD")
         let div = document.createElement("div")
         div.setAttribute("class", "uk-card uk-card-default uk-card-body")
         div.innerHTML="ID: "+id
@@ -79,3 +79,14 @@ async function loadCatalogoLoteCliente()
     document.getElementById("bodyContent").innerHTML=html
     printCatalogoLoteCliente();
 }
+
+async function FiltrarLoteCliente(){
+
+}
+
+
+
+
+
+
+loadCatalogoLoteCliente();

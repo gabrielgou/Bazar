@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,6 +93,45 @@ public class RepositorioLote implements RepositorioGenerico<Lote,Integer> {
         pstm.setInt(1,integer);
         pstm.execute();
     }
+
+
+    public List<Lote> filter(String string) throws SQLException, ClassNotFoundException {
+        String sql = "Select * from lote as l inner join produto as p on l.id = p.codigo and p.nome like %?%";
+        PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
+        pstm.setString(1, string);
+        List<Lote> lotes = new ArrayList<>();
+        ResultSet result = pstm.executeQuery();
+        int enable=1;
+        while(result.next())
+        {
+            for(Lote aux : lotes)
+            {
+                if(aux.getId()==result.getInt("id_lote"))
+                {
+                    enable=0;
+                    aux.getProduto().add(RepositorioProduto.getCurrentInstance().read(result.getInt("codigo")));
+                }
+            }
+            if(enable==1) {
+                Lote l = new Lote();
+                l.setDataEntrega(result.getDate("dataentrega"));
+                l.setCodigo(result.getInt("codigo"));
+                l.setIdOD(result.getInt("id_od"));
+                l.setId(result.getInt("id_lote"));
+                l.setIdOF(result.getInt("id_of"));
+                l.setObservacao(result.getString("observacao"));
+                l.setOrgaoDonatario(RepositorioOD.getCurrentInstance().read(l.getIdOD()));
+                l.setOrgaoFiscal(RepositorioOF.getCurrentInstance().read(l.getIdOF()));
+                List<Produto> p = new ArrayList<>();
+                p.add(RepositorioProduto.getCurrentInstance().read(l.getCodigo()));
+                l.setProduto(p);
+                lotes.add(l);
+            }
+            enable=1;
+        }
+        return lotes;
+    }
+
 
     @Override
     public List<Lote> readAll() throws SQLException, ClassNotFoundException, ParseException {
