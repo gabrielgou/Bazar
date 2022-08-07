@@ -1,4 +1,4 @@
-<h1> Desafio: Leilão Web2</h1>
+<h1>Leilão Web2</h1>
 
 <p>💎Implementações realizadas: <strong>Cadastro e leitura de produto, Cadastro e leitura de Orgão Donatário, Cadastro e leitura  de Orgão Fiscalizador e cadastro e leitura 
  de Lotes</strong> através de um projeto focado no back-end em Java e o Front-end em Javascript. </p>
