@@ -110,7 +110,7 @@ public class RepositorioLote implements RepositorioGenerico<Lote,Integer> {
     }
 
     public List<Lote> filterOD(String string) throws SQLException, ClassNotFoundException, ParseException {
-        String sql = "Select * from lote as l inner join orgaodonatario as od on l.codigo = od.id and od.nome like ?";
+        String sql = "Select * from lote as l inner join orgaodonatario as od on l.id_od = od.id and od.nome like ?";
         PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
         pstm.setString(1, "%%"+string+"%%");
         List<Lote> lotes = new ArrayList<>();
@@ -124,7 +124,7 @@ public class RepositorioLote implements RepositorioGenerico<Lote,Integer> {
     }
 
     public List<Lote> filterOF(String string) throws SQLException, ClassNotFoundException, ParseException {
-        String sql = "Select * from lote as l inner join orgaofiscalizador as orf on l.codigo = orf.id and orf.nome like ?";
+        String sql = "Select * from lote as l inner join orgaofiscalizador as orf on l.id_of = orf.id and orf.nome like ?";
         PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
         pstm.setString(1, "%%"+string+"%%");
         List<Lote> lotes = new ArrayList<>();
