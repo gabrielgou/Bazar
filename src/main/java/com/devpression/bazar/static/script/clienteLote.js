@@ -3,7 +3,17 @@ async function printCatalogoLoteCliente()
     console.log("printCatalogoLote")
     let ulLote = document.getElementById("ulLote")
     let inputSearch = document.getElementById("inputSearch")
-    let url= inputSearch.value==""?"http://localhost:8080/lote":("http://localhost:8080/lote/produto/"+inputSearch.value)
+    let selectSearch = document.getElementById("selectFilter")
+    //let url= inputSearch.value==""?"http://localhost:8080/lote":("http://localhost:8080/lote/produto/"+inputSearch.value)
+    let url= "http://localhost:8080/lote"
+    if(selectSearch.value=="produto"){
+        url= "http://localhost:8080/lote/produto/"+inputSearch.value
+    }else if(selectSearch.value=="OD"){
+        url= "http://localhost:8080/lote/orgaoDonatario/"+inputSearch.value
+    }else if(selectSearch.value=="OF"){
+        url= "http://localhost:8080/lote/orgaoFiscalizador/"+inputSearch.value
+    }
+
     let resp = await fetch(url, {
         method: "GET",
         headers: {
