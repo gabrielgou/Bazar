@@ -99,6 +99,21 @@ public class LoteController {
         }
     }
 
+    @CrossOrigin("*")
+    @GetMapping("/lote/orgaoFiscalizador/{nome}")
+    public ResponseEntity<?> filterOF(@PathVariable("nome") String nome)
+    {
+        try {
+            List<Lote> p = RepositorioLote.getCurrentInstance().filterOF(nome);
+            if(p!=null)
+                return new ResponseEntity<>(p,HttpStatus.OK);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } catch (SQLException | ClassNotFoundException | ParseException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
 
     @CrossOrigin("*")
     @GetMapping("/lote")
